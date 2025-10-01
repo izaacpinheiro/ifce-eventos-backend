@@ -8,5 +8,5 @@ CREATE TABLE agendamento (
     id_evento UUID,
     FOREIGN KEY (id_evento) REFERENCES evento(id),
     id_lugar UUID,
-    FOREIGN KEY (id_local) REFERENCES lugar(id)
+    FOREIGN KEY (id_lugar) REFERENCES lugar(id)
 );

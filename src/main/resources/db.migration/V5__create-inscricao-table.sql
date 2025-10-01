@@ -5,5 +5,7 @@ CREATE TABLE inscricao (
     data DATE NOT NULL DEFAULT CURRENT_DATE,
     status BOOLEAN DEFAULT true,
     id_evento UUID,
-    FOREIGN KEy (id_evento) REFERENCES evento(id)
+    FOREIGN KEY (id_evento) REFERENCES evento(id),
+    id_usuario UUID,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
