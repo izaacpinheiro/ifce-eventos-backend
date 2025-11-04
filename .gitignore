@@ -163,3 +163,6 @@ buildNumber.properties
 
 pgdata/
 .idea/inspectionProfiles/
+.idea
+*.iml
+*.ipr
