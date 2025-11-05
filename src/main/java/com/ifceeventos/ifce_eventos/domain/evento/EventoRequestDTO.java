@@ -1,11 +1,11 @@
 package com.ifceeventos.ifce_eventos.domain.evento;
 
-import com.ifceeventos.ifce_eventos.domain.usuario.Usuario;
+import java.util.UUID;
 
 public record EventoRequestDTO(
         // vai ser usado no create do Evento
         String titulo,
         String descricao,
-        Boolean remote,
-        Usuario usuario
+        Boolean remote
+        //UUID id_criador -> como vou salvar isso no bd?
 ) { }

@@ -25,7 +25,7 @@ public class Evento {
     private Boolean remote;
 
     @Enumerated(EnumType.STRING)
-    private StatusEvento statusEvento;
+    private StatusEvento statusAprovacao;
 
     // Relacionamento N:1 com Usuario
     @ManyToOne
