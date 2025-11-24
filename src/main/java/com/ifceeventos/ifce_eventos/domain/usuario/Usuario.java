@@ -32,15 +32,16 @@ public class Usuario implements UserDetails {
 
     // Talves precise de uma relacionamento com Inscricao
 
-    public Usuario(String email, String senha, TipoUsuario tipoUsuario){
+    public Usuario(String email, String senha, String nome, TipoUsuario tipoUsuario){
         this.email = email;
         this.senha = senha;
+        this.nome = nome;
         this.tipoUsuario = tipoUsuario;
     }
 
     @Override
     public String getPassword() {
-        return "";
+        return this.senha;
     }
 
     @Override
