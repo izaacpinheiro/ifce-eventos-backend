@@ -50,4 +50,12 @@ public class EventoService {
         return repository.save(evento);
     }
 
+    public Evento cancelarEvento(UUID eventoId) {
+        Evento evento = repository.findById(eventoId)
+                .orElseThrow(() -> new RuntimeException("Evento não encontrado."));
+
+        evento.setStatusAprovacao(StatusEvento.CANCELADO);
+        return repository.save(evento);
+    }
+
 }

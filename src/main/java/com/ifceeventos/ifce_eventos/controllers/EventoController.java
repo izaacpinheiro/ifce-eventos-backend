@@ -46,4 +46,11 @@ public class EventoController {
         Evento evento = eventoService.recusarEvento(id);
         return ResponseEntity.ok(new EventoResponseDTO(evento));
     }
+
+    // apenas para admin
+    @PutMapping("/{id}/cancelar")
+    public ResponseEntity<EventoResponseDTO> cancelar(@PathVariable UUID id) {
+        Evento evento = eventoService.cancelarEvento(id);
+        return ResponseEntity.ok(new EventoResponseDTO(evento));
+    }
 }
