@@ -1,9 +1,6 @@
 package com.ifceeventos.ifce_eventos.controllers;
 
-import com.ifceeventos.ifce_eventos.domain.usuario.AuthenticationDTO;
-import com.ifceeventos.ifce_eventos.domain.usuario.LoginResponseDTO;
-import com.ifceeventos.ifce_eventos.domain.usuario.RegisterDTO;
-import com.ifceeventos.ifce_eventos.domain.usuario.Usuario;
+import com.ifceeventos.ifce_eventos.domain.usuario.*;
 import com.ifceeventos.ifce_eventos.infra.security.TokenService;
 import com.ifceeventos.ifce_eventos.repositories.UsuarioRepository;
 import jakarta.validation.Valid;
@@ -51,7 +48,7 @@ public class AuthenticationController {
         if (this.repository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
 
         String senhaCriptografada = new BCryptPasswordEncoder().encode(data.senha());
-        Usuario novoUsuario = new Usuario(data.email(), senhaCriptografada, data.nome(), data.role());
+        Usuario novoUsuario = new Usuario(data.email(), senhaCriptografada, data.nome(), TipoUsuario.PARTICIPANTE);
 
         // salvando novo usuário no bd
         this.repository.save(novoUsuario);
