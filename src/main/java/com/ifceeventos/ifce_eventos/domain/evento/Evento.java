@@ -30,5 +30,5 @@ public class Evento {
     // Relacionamento N:1 com Usuario
     @ManyToOne
     @JoinColumn(name = "id_criador")
-    private Usuario usuario;
+    private Usuario criador;
 }

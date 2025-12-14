@@ -7,6 +7,9 @@ import com.ifceeventos.ifce_eventos.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 public class EventoService {
 
@@ -26,4 +29,25 @@ public class EventoService {
 
         return novoEvento;
     }
+
+    public List<Evento> listarEventosPendentes() {
+        return repository.findByStatusAprovacao(StatusEvento.PENDENTE);
+    }
+
+    public Evento aprovarEvento(UUID eventoId) {
+        Evento evento = repository.findById(eventoId)
+                .orElseThrow(() -> new RuntimeException("Evento não encontrado."));
+
+        evento.setStatusAprovacao(StatusEvento.APROVADO);
+        return repository.save(evento);
+    }
+
+    public Evento recusarEvento(UUID eventoId) {
+        Evento evento = repository.findById(eventoId)
+                .orElseThrow(() -> new RuntimeException("Evento não encontrado."));
+
+        evento.setStatusAprovacao(StatusEvento.RECUSADO);
+        return repository.save(evento);
+    }
+
 }
