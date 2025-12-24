@@ -3,8 +3,11 @@ package com.ifceeventos.ifce_eventos.services;
 import com.ifceeventos.ifce_eventos.domain.evento.Evento;
 import com.ifceeventos.ifce_eventos.domain.evento.EventoRequestDTO;
 import com.ifceeventos.ifce_eventos.domain.evento.StatusEvento;
+import com.ifceeventos.ifce_eventos.domain.usuario.Usuario;
 import com.ifceeventos.ifce_eventos.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +20,19 @@ public class EventoService {
     private EventoRepository repository;
 
     public Evento createEvento(EventoRequestDTO data) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // puxa o criador do evento
+        Usuario criador = (Usuario) authentication.getPrincipal();
+
         // cria um novo evento com as informações passadas pelo usuário
         Evento novoEvento = new Evento();
         novoEvento.setTitulo(data.titulo());
         novoEvento.setDescricao(data.descricao());
         novoEvento.setRemote(data.remote());
         novoEvento.setStatusAprovacao(StatusEvento.PENDENTE); // o evento é por padrão criado como pendente
+        novoEvento.setCriador(criador); // criador do evento (salva apenas o ID)
 
         // Salvando o novo evento no bd
         repository.save(novoEvento);
