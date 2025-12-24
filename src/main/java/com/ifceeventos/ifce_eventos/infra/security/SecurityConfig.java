@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/avento/pendentes").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/evento/{id}/aprovar").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/evento/{id}/recusar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/admin/register/professor").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
