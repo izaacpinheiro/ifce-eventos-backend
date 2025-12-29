@@ -24,5 +24,5 @@ public class Lugar {
     private String localizacao;
 
     @Enumerated(EnumType.STRING)
-    private TipoLugar tipoLugar;
+    private TipoLugar tipo;
 }
