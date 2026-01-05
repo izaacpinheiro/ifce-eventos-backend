@@ -23,7 +23,7 @@ public class Agendamento {
     @GeneratedValue
     private UUID id;
 
-    private LocalDate date;
+    private LocalDate data;
     private LocalTime horaInicio;
     private LocalTime horaFim;
 

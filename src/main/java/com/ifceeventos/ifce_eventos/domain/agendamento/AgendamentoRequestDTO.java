@@ -1,16 +1,14 @@
 package com.ifceeventos.ifce_eventos.domain.agendamento;
 
-import com.ifceeventos.ifce_eventos.domain.evento.Evento;
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
 public record AgendamentoRequestDTO(
-        // vai ser usado no create de Agendamento
+        // vai ser usado na criação dos Agendamentos
+        UUID eventoId,
+        UUID lugarId,
         LocalDate data,
         LocalTime horaInicio,
-        LocalTime horaFim,
-        Evento evento,
-        Local local
+        LocalTime horaFim
 ){ }
