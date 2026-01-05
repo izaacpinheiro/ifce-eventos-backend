@@ -36,6 +36,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/evento/{id}/aprovar").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/evento/{id}/recusar").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/admin/register/professor").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/agendamento").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/lugar/listar").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
