@@ -34,6 +34,14 @@ public class EventoController {
     }
 
     // apenas para admin
+    @GetMapping("/aprovados")
+    public List<EventoResponseDTO> listarEventosAprovados() {
+        return eventoService.listarEventosAprovados().stream()
+                .map(EventoResponseDTO::new)
+                .toList();
+    }
+
+    // apenas para admin
     @PutMapping("/{id}/aprovar")
     public ResponseEntity<EventoResponseDTO> aprovar(@PathVariable UUID id) {
         Evento evento = eventoService.aprovarEvento(id);
