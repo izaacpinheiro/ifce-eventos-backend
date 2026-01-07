@@ -9,8 +9,12 @@ import com.ifceeventos.ifce_eventos.repositories.AgendamentoRepository;
 import com.ifceeventos.ifce_eventos.repositories.EventoRepository;
 import com.ifceeventos.ifce_eventos.repositories.LugarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+@Service
 public class AgendamentoService {
 
     @Autowired
@@ -60,5 +64,9 @@ public class AgendamentoService {
         agendamentoRepository.save(novoAgendamento);
 
         return novoAgendamento;
+    }
+
+    public List<Agendamento> listarAgendamentos() {
+        return agendamentoRepository.findAll();
     }
 }
