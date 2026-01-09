@@ -1,5 +1,6 @@
 package com.ifceeventos.ifce_eventos.domain.inscricao;
 
+import com.ifceeventos.ifce_eventos.domain.agendamento.Agendamento;
 import com.ifceeventos.ifce_eventos.domain.evento.Evento;
 import com.ifceeventos.ifce_eventos.domain.usuario.Usuario;
 import jakarta.persistence.*;
@@ -22,15 +23,15 @@ public class Inscricao {
     @GeneratedValue
     private UUID id;
 
-    private LocalDate dataInscricao;
+    private LocalDate data;
 
     @Enumerated(EnumType.STRING)
     private StatusInscricao status;
 
-    // Relação N:1 com Evento
+    // Relação N:1 com Agendamento
     @ManyToOne
-    @JoinColumn(name = "id_evento")
-    private Evento evento;
+    @JoinColumn(name = "id_agendamento")
+    private Agendamento agendamento;
 
     // Relação N:1 com Usuario (um usuário poder ter várias inscricoes)
     @ManyToOne
