@@ -1,5 +1,7 @@
 package com.ifceeventos.ifce_eventos.infra.security;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +19,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 // config padrão do spring security
 @Configuration
 @EnableWebSecurity
+@SecurityScheme(name = SecurityConfig.SECURITY, type = SecuritySchemeType.HTTP, bearerFormat = "JWT", scheme = "bearer")
 public class SecurityConfig {
+
+    // config do swagger
+    public static final String SECURITY = "bearerAuth";
 
     // usado para filtro nas requisições que quero que sejam autenticadas
     @Autowired
@@ -31,6 +37,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "swagger-ui/**", "swagger-ui.html").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/evento").hasRole("PROFESSOR")
                         .requestMatchers(HttpMethod.GET, "/api/avento/pendentes").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/evento/{id}/aprovar").hasRole("ADMIN")
