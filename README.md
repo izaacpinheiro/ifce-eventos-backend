@@ -17,6 +17,7 @@ It allows **administrators and professors** to create, edit, and manage events, 
 - Maven
 - PostgreSQL
 - Docker
+- Swagger
 
 ## 🧩 Features (planned)
 
