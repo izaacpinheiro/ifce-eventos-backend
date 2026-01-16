@@ -1,6 +1,7 @@
 package com.ifceeventos.ifce_eventos.repositories;
 
 import com.ifceeventos.ifce_eventos.domain.agendamento.Agendamento;
+import com.ifceeventos.ifce_eventos.domain.evento.Evento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -34,4 +35,6 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, UUID> 
         OR (a.date = :hoje AND a.horaFim > :agora)
     """)
     List<Agendamento> listarAgendamentosFuturos(@Param("hoje") LocalDate hoje, @Param("agora") LocalTime agora);
+
+    void deleteByEvento(Evento evento);
 }

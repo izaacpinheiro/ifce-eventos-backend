@@ -4,6 +4,7 @@ import com.ifceeventos.ifce_eventos.domain.evento.Evento;
 import com.ifceeventos.ifce_eventos.domain.evento.EventoRequestDTO;
 import com.ifceeventos.ifce_eventos.domain.evento.StatusEvento;
 import com.ifceeventos.ifce_eventos.domain.usuario.Usuario;
+import com.ifceeventos.ifce_eventos.repositories.AgendamentoRepository;
 import com.ifceeventos.ifce_eventos.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,9 @@ public class EventoService {
 
     @Autowired
     private EventoRepository repository;
+
+    @Autowired
+    private AgendamentoRepository agendamentoRepository;
 
     public Evento createEvento(EventoRequestDTO data) {
 
@@ -69,6 +73,10 @@ public class EventoService {
                 .orElseThrow(() -> new RuntimeException("Evento não encontrado."));
 
         evento.setStatusAprovacao(StatusEvento.CANCELADO);
+
+        // remove todos os agendamentos ligados a esse evento
+        agendamentoRepository.deleteByEvento(evento);
+
         return repository.save(evento);
     }
 
