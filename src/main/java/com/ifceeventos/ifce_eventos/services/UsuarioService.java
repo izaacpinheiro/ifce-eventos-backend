@@ -3,6 +3,7 @@ package com.ifceeventos.ifce_eventos.services;
 import com.ifceeventos.ifce_eventos.domain.agendamento.Agendamento;
 import com.ifceeventos.ifce_eventos.domain.usuario.Usuario;
 import com.ifceeventos.ifce_eventos.repositories.InscricaoRepository;
+import com.ifceeventos.ifce_eventos.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,15 @@ public class UsuarioService {
     @Autowired
     private InscricaoRepository inscricaoRepository;
 
+    @Autowired
+    private UsuarioRepository repository;
+
     // lista dos os agendamentos do usuário
     public List<Agendamento> listarAgendamentos(Usuario usuario) {
         return inscricaoRepository.findAgendamentos(usuario);
+    }
+
+    public Usuario getUsuarioInfos(String email) {
+        return repository.findByEmail(email);
     }
 }
