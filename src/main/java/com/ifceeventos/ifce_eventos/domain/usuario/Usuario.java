@@ -28,6 +28,8 @@ public class Usuario implements UserDetails {
     private String nome;
     private String email;
     private String senha; // será armazenada criptografada
+
+    @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
 
     // Talves precise de uma relacionamento com Inscricao
