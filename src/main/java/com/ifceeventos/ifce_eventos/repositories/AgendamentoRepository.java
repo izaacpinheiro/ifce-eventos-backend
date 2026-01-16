@@ -3,9 +3,11 @@ package com.ifceeventos.ifce_eventos.repositories;
 import com.ifceeventos.ifce_eventos.domain.agendamento.Agendamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,4 +26,12 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, UUID> 
             LocalTime horaInicio,
             LocalTime horaFim
     );
+
+    // retorna apenas eventos que ainda vão acontecer
+    @Query("""
+        SELECT a FROM Agendamento a
+        WHERE a.date > :hoje
+        OR (a.date = :hoje AND a.horaFim > :agora)
+    """)
+    List<Agendamento> listarAgendamentosFuturos(@Param("hoje") LocalDate hoje, @Param("agora") LocalTime agora);
 }
