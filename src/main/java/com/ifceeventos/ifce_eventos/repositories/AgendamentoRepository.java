@@ -31,8 +31,8 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, UUID> 
     // retorna apenas eventos que ainda vão acontecer
     @Query("""
         SELECT a FROM Agendamento a
-        WHERE a.date > :hoje
-        OR (a.date = :hoje AND a.horaFim > :agora)
+        WHERE a.data > :hoje
+        OR (a.data = :hoje AND a.horaFim > :agora)
     """)
     List<Agendamento> listarAgendamentosFuturos(@Param("hoje") LocalDate hoje, @Param("agora") LocalTime agora);
 
