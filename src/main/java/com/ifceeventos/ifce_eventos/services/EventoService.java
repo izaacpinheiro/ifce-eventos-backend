@@ -35,6 +35,7 @@ public class EventoService {
         novoEvento.setTitulo(data.titulo());
         novoEvento.setDescricao(data.descricao());
         novoEvento.setRemote(data.remote());
+        novoEvento.setDataPrevista(data.dataPrevista());
         novoEvento.setStatusAprovacao(StatusEvento.PENDENTE); // o evento é por padrão criado como pendente
         novoEvento.setCriador(criador); // criador do evento (salva apenas o ID)
 

@@ -55,9 +55,19 @@ public class AgendamentoService {
         Lugar lugar = lugarRepository.findById(data.lugarId())
                 .orElseThrow(() -> new RuntimeException("Lugar não encontrado"));
 
+        LocalDate dataAgendamento;
+
+        if (data.data() != null) {
+            dataAgendamento = data.data();
+        } else if (evento.getDataPrevista() != null) {
+            dataAgendamento = evento.getDataPrevista();
+        } else {
+            throw new RuntimeException("Evento não possui data prevista");
+        }
+
         // cria agendamento
         Agendamento novoAgendamento = new Agendamento();
-        novoAgendamento.setData(data.data());
+        novoAgendamento.setData(dataAgendamento);
         novoAgendamento.setHoraInicio(data.horaInicio());
         novoAgendamento.setHoraFim(data.horaFim());
         novoAgendamento.setEvento(evento);

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Table(name = "evento")
@@ -23,6 +24,7 @@ public class Evento {
     private String titulo;
     private String descricao;
     private Boolean remote;
+    private LocalDate dataPrevista;
 
     @Enumerated(EnumType.STRING)
     private StatusEvento statusAprovacao;
