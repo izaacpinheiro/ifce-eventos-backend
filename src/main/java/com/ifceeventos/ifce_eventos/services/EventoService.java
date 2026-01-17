@@ -53,6 +53,10 @@ public class EventoService {
         return repository.findByStatusAprovacao(StatusEvento.APROVADO);
     }
 
+    public List<Evento> listarAprovadosSemAgendamento() {
+        return repository.findAprovadosSemAgendamento();
+    }
+
     public Evento aprovarEvento(UUID eventoId) {
         Evento evento = repository.findById(eventoId)
                 .orElseThrow(() -> new RuntimeException("Evento não encontrado."));

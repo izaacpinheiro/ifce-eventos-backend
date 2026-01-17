@@ -87,6 +87,26 @@ public class EventoController {
                 .toList();
     }
 
+    @GetMapping("/aprovados/sem-agendamento")
+    @Operation(summary = "Listar eventos aprovados sem agendamento", description = """
+        Retorna todos os eventos com status APROVADO que ainda não tem agendamento.
+        
+        Regras:
+        - Disponível apenas para ADMIN
+        - Útil para ADMINs quando forem fazer agendamentos
+        """
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Eventos retornados com sucesso"),
+            @ApiResponse(responseCode = "403", description = "Acesso negado"),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
+    })
+    public List<EventoResponseDTO> listarAprovadosSemAgendamento() {
+        return eventoService.listarAprovadosSemAgendamento().stream()
+                .map(EventoResponseDTO::new)
+                .toList();
+    }
+
     @PutMapping("/{id}/aprovar")
     @Operation(summary = "Aprovar evento", description = """
         Aprova um evento pelo seu ID.
