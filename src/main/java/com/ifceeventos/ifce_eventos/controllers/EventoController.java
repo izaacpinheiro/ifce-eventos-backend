@@ -47,6 +47,22 @@ public class EventoController {
         return ResponseEntity.ok(novoEvento);
     }
 
+    @GetMapping("/{id}")
+    @Operation(summary = "Pesquisa evento por ID", description = """
+        Retorna todas as informaçõs de um evento.
+        - Disponível para todos os usuários do sistema
+        """
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Evento retornado com sucesso"),
+            @ApiResponse(responseCode = "403", description = "Acesso negado"),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
+    })
+    public ResponseEntity<EventoResponseDTO> buscarEventoPorId(@PathVariable UUID id) {
+        Evento evento = eventoService.buscarEventoPorId(id);
+        return ResponseEntity.ok(new EventoResponseDTO(evento));
+    }
+
     @GetMapping("/pendentes")
     @Operation(summary = "Listar eventos pendentes", description = """
         Retorna todos os eventos com status PENDENTE.

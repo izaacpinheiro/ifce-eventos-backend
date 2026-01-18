@@ -57,6 +57,11 @@ public class EventoService {
         return repository.findAprovadosSemAgendamento();
     }
 
+    public Evento buscarEventoPorId(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Evento não encontrado."));
+    }
+
     public Evento aprovarEvento(UUID eventoId) {
         Evento evento = repository.findById(eventoId)
                 .orElseThrow(() -> new RuntimeException("Evento não encontrado."));
