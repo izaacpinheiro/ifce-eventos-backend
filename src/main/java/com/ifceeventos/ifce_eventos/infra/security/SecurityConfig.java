@@ -54,6 +54,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/agendamento").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/agendamento/listar").hasRole("PARTICIPANTE")
                         .requestMatchers(HttpMethod.GET, "/api/lugar/listar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/lugar/{id}").hasRole("PARTICIPANTE")
                         .requestMatchers(HttpMethod.POST, "/api/inscricao").hasRole("PARTICIPANTE")
                         .requestMatchers(HttpMethod.GET, "/api/usuario").hasRole("PARTICIPANTE")
                         .requestMatchers(HttpMethod.GET, "/api/usuario/me/agendamentos").hasRole("PARTICIPANTE")
