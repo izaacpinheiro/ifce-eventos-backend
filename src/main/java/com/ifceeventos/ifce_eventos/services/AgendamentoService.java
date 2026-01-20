@@ -2,6 +2,7 @@ package com.ifceeventos.ifce_eventos.services;
 
 import com.ifceeventos.ifce_eventos.domain.agendamento.Agendamento;
 import com.ifceeventos.ifce_eventos.domain.agendamento.AgendamentoRequestDTO;
+import com.ifceeventos.ifce_eventos.domain.agendamento.AgendamentoResponseDTO;
 import com.ifceeventos.ifce_eventos.domain.evento.Evento;
 import com.ifceeventos.ifce_eventos.domain.evento.StatusEvento;
 import com.ifceeventos.ifce_eventos.domain.lugar.Lugar;
@@ -78,7 +79,11 @@ public class AgendamentoService {
         return novoAgendamento;
     }
 
-    public List<Agendamento> listarAgendamentos() {
-        return agendamentoRepository.listarAgendamentosFuturos(LocalDate.now(), LocalTime.now());
+    public List<AgendamentoResponseDTO> listarAgendamentos() {
+        List<Agendamento> agendamentos = agendamentoRepository.listarAgendamentosFuturos(LocalDate.now(), LocalTime.now());
+
+        return agendamentos.stream()
+                .map(AgendamentoResponseDTO::new)
+                .toList();
     }
 }

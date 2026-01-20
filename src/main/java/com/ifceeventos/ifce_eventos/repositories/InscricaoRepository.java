@@ -5,7 +5,6 @@ import com.ifceeventos.ifce_eventos.domain.inscricao.Inscricao;
 import com.ifceeventos.ifce_eventos.domain.usuario.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,10 +18,8 @@ public interface InscricaoRepository extends JpaRepository<Inscricao, UUID> {
     @Query("""
         SELECT i.agendamento
         FROM Inscricao i
-        WHERE i.usuario = :usuario
+        WHERE i.usuario.id = :id
         ORDER BY i.agendamento.data, i.agendamento.horaInicio
     """)
-    List<Agendamento> findAgendamentos(
-            @Param("usuario") Usuario usuario
-    );
+    List<Agendamento> findAgendamentosByUsuarioId(UUID id);
 }

@@ -1,6 +1,6 @@
 package com.ifceeventos.ifce_eventos.controllers;
 
-import com.ifceeventos.ifce_eventos.domain.agendamento.AgendamentoUsuarioResponseDTO;
+import com.ifceeventos.ifce_eventos.domain.agendamento.AgendamentoResponseDTO;
 import com.ifceeventos.ifce_eventos.domain.usuario.Usuario;
 import com.ifceeventos.ifce_eventos.domain.usuario.UsuarioInfosDTO;
 import com.ifceeventos.ifce_eventos.infra.security.SecurityConfig;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @RestController
@@ -45,14 +44,14 @@ public class UsuarioController {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
-    public List<AgendamentoUsuarioResponseDTO> listarMeusAgendamentos(Authentication authentication) {
+    public ResponseEntity<List<AgendamentoResponseDTO>> listarMeusAgendamentos(Authentication authentication) {
         // puxando o usuário a partir do JWT
         Usuario usuario = (Usuario) authentication.getPrincipal();
 
-        // retonna uma lista dos agendamentos do usuário
-        return usuarioService.listarAgendamentos(usuario).stream()
-                .map(AgendamentoUsuarioResponseDTO::new)
-                .toList();
+        List<AgendamentoResponseDTO> response = usuarioService.listarAgendamentos(usuario);
+
+        // retona uma lista dos agendamentos do usuário
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping

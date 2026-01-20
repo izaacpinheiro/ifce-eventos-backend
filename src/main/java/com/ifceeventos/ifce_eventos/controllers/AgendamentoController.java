@@ -59,9 +59,8 @@ public class AgendamentoController {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
-    public List<AgendamentoResponseDTO> listarAgendamentos() {
-        return agendamentoService.listarAgendamentos().stream()
-                .map(AgendamentoResponseDTO::new)
-                .toList();
+    public ResponseEntity<List<AgendamentoResponseDTO>> listarAgendamentos() {
+        List<AgendamentoResponseDTO> agendamentos = agendamentoService.listarAgendamentos();
+        return ResponseEntity.ok(agendamentos);
     }
 }
