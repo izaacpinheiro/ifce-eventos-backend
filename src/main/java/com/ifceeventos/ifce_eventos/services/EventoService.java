@@ -2,6 +2,7 @@ package com.ifceeventos.ifce_eventos.services;
 
 import com.ifceeventos.ifce_eventos.domain.evento.Evento;
 import com.ifceeventos.ifce_eventos.domain.evento.EventoRequestDTO;
+import com.ifceeventos.ifce_eventos.domain.evento.EventoResponseDTO;
 import com.ifceeventos.ifce_eventos.domain.evento.StatusEvento;
 import com.ifceeventos.ifce_eventos.domain.usuario.Usuario;
 import com.ifceeventos.ifce_eventos.repositories.AgendamentoRepository;
@@ -45,16 +46,28 @@ public class EventoService {
         return novoEvento;
     }
 
-    public List<Evento> listarEventosPendentes() {
-        return repository.findByStatusAprovacao(StatusEvento.PENDENTE);
+    public List<EventoResponseDTO> listarEventosPendentes() {
+        List<Evento> eventosPendentes =  this.repository.findByStatusAprovacao(StatusEvento.PENDENTE);
+
+        return eventosPendentes.stream()
+                .map(EventoResponseDTO::new)
+                .toList();
     }
 
-    public List<Evento> listarEventosAprovados() {
-        return repository.findByStatusAprovacao(StatusEvento.APROVADO);
+    public List<EventoResponseDTO> listarEventosAprovados() {
+        List<Evento> eventosAprovados = this.repository.findByStatusAprovacao(StatusEvento.APROVADO);
+
+        return eventosAprovados.stream()
+                .map(EventoResponseDTO::new)
+                .toList();
     }
 
-    public List<Evento> listarAprovadosSemAgendamento() {
-        return repository.findAprovadosSemAgendamento();
+    public List<EventoResponseDTO> listarAprovadosSemAgendamento() {
+        List<Evento> eventoAprovadosSemAgendamento = this.repository.findAprovadosSemAgendamento();
+
+        return eventoAprovadosSemAgendamento.stream()
+                .map(EventoResponseDTO::new)
+                .toList();
     }
 
     public Evento buscarEventoPorId(UUID id) {

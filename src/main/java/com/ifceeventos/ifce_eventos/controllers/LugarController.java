@@ -46,8 +46,9 @@ public class LugarController {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
-    public List<Lugar> listar() {
-        return lugarRepository.findAll();
+    public ResponseEntity<List<Lugar>> listar() {
+        List<Lugar> lugares = this.lugarRepository.findAll();
+        return ResponseEntity.ok(lugares);
     }
 
     @GetMapping("/{id}")

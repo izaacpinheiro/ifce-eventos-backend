@@ -77,10 +77,9 @@ public class EventoController {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
-    public List<EventoResponseDTO> listarPendentes() {
-        return eventoService.listarEventosPendentes().stream()
-                .map(EventoResponseDTO::new)
-                .toList();
+    public ResponseEntity<List<EventoResponseDTO>> listarPendentes() {
+        List<EventoResponseDTO> eventosPendentes = this.eventoService.listarEventosPendentes();
+        return ResponseEntity.ok(eventosPendentes);
     }
 
     @GetMapping("/aprovados")
@@ -97,10 +96,9 @@ public class EventoController {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
-    public List<EventoResponseDTO> listarEventosAprovados() {
-        return eventoService.listarEventosAprovados().stream()
-                .map(EventoResponseDTO::new)
-                .toList();
+    public ResponseEntity<List<EventoResponseDTO>> listarEventosAprovados() {
+        List<EventoResponseDTO> eventosAprovados = this.eventoService.listarEventosAprovados();
+        return ResponseEntity.ok(eventosAprovados);
     }
 
     @GetMapping("/aprovados/sem-agendamento")
@@ -117,10 +115,9 @@ public class EventoController {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
-    public List<EventoResponseDTO> listarAprovadosSemAgendamento() {
-        return eventoService.listarAprovadosSemAgendamento().stream()
-                .map(EventoResponseDTO::new)
-                .toList();
+    public ResponseEntity<List<EventoResponseDTO>> listarAprovadosSemAgendamento() {
+        List<EventoResponseDTO> eventosAprovadosSemAgendamento = this.eventoService.listarAprovadosSemAgendamento();
+        return ResponseEntity.ok(eventosAprovadosSemAgendamento);
     }
 
     @PutMapping("/{id}/aprovar")
